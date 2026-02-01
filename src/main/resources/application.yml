@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: bank-deposit-system
+  
+  # 数据源配置 - 使用MySQL数据库
+  datasource:
+    url: jdbc:mysql://localhost:3306/bankdb?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: "Llft512618!"
+  
+  # JPA配置
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  
+  # H2控制台（禁用，因为我们使用MySQL）
+  h2:
+    console:
+      enabled: false
+  
+  # 初始化数据 - 修改为embedded，只在嵌入式数据库时执行
+  sql:
+    init:
+      mode: embedded
+      schema-locations: classpath:data.sql
+      data-locations: classpath:data.sql
+
+# 服务器配置
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+# 日志配置
+logging:
+  level:
+    cn.edu.bank: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
